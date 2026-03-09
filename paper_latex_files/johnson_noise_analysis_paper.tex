@@ -1,0 +1,187 @@
+\documentclass[aps,prl,twocolumn,superscriptaddress]{revtex4-1}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{amsmath}
+\usepackage{natbib}
+\usepackage[american]{circuitikz}
+
+
+\usepackage{hyperref}
+\setlength{\parskip}{0pt}
+
+\begin{document}
+
+
+\title{Measurement of Thermal Noise in Electrical Resistors}
+
+
+\author{A. Keightley}
+	\affiliation{Department of Physics and Astronomy, University of British Columbia, Vancouver, British Columbia, V6T1Z4, Canada}
+\date{\today}
+
+
+\newcommand{\rxx}{{R}_{xx}}
+\newcommand{\rxy}{{R}_{xy}}
+\newcommand{\rdp}{{R}_{D}^+}
+\newcommand{\rdm}{{R}_{D}^-}
+\newcommand{\freqS}{492\text{Hz}}
+\newcommand{\freqF}{15492\text{Hz}}
+\newcommand{\binsize}{12\text{Hz}}
+
+\begin{abstract}
+Thermal noise due to the excitation of electrons in conducting material is a fundamental property of electronic systems, and when these systems are in thermal equilibrium it is theorized to have a linear relationship with temperature and resistance. We examined this relationship by measuring the thermal noise at different resistances, performing cross spectral density analysis, and comparing these spectral densities against theoretical predictions. Measured spectral densities generally followed the expected linear relationship with resistance at a fixed temperature, with the majority values in agreement with theoretical predictions within uncertainties, and all values within $5\%$ of the theoretical predictions.
+\end{abstract}
+
+% insert suggested PACS numbers in braces on next line
+\pacs{}
+% insert suggested keywords - APS authors don't need to do this
+%\keywords{}
+
+%\maketitle must follow title, authors, abstract, \pacs, and \keywords
+\maketitle
+
+% Introduction
+
+Conducting materials possess an inherent electromotive force due to the thermal excitation of electrons within the material itself at any non-zero temperature \cite{Nyquist1928}. This 'thermal noise' is a fundamental property of electronic systems, and is present in all experimental setups with electronics. Although often difficult to accurately measure, its presence allows for some interesting applications, including thermal noise thermometry; given the mean-squared voltage measured at one known and one unknown temperature, we can solve for the unknown temperature by using the thermal noise spectral density at the known temperature as a reference point \cite{JNThermometry2003}. Although not practical in all applications, thermal noise thermometry can be particularly useful in extreme low-temperatures where other methods of determining temperature become less effective \cite{Qu2019}.
+
+As discovered by Nyquist in 1928 \cite{Nyquist1928}, the power spectral density (PSD) of this thermal noise $S_v$ can be expressed as a linear relationship between temperature T and resistance R where $S_v = 4k_bTR$. As such, at fixed temperature and known resistances it is expected that measured thermal noise average PSD will be in agreement with this theoretical value, and across a range of resistances it is expected that these averages will have a linear fit with a slope of $4k_bT$. Our experiment will set out to examine if these expectations hold.
+
+% Theoretical Background
+
+Building upon the discovery by Johnson of voltage in conductors due to the thermal excitation of electrons within the conductors, Nyquist proposed that the squared voltage ($E^2$) of this -- which we will call 'thermal noise' -- can be expressed as a relation between the temperature $T$ and resistance $R$ where 
+\begin{equation}
+	E^2 = 4k_bTR\Delta f 
+\end{equation} 
+where $k_b$ is the Boltzmann constant \cite{Nyquist1928}. We may write this as a spectral density $S_v$ [V$^2$/Hz] where
+\begin{equation}
+	S_v = \frac{E^2}{\Delta f} = 4k_bTR
+\end{equation}
+From this, the thermal noise at a fixed temperature and resistance is expected to be flat, and linearly dependent on resistance and temperature. As the theoretical expectation for thermal noise includes the Boltzmann constant $k_b\approx 1.381\times10^{-23}$m$^2$kgs$^{-2}$K$^{-1}$, at the temperatures and resistances examined in this experiment the thermal noise spectral density is expected to be small; as such, any excess noise sources -- shot noise, or noise from the amplifier -- can negatively impact our measurement of this thermal noise. As the amplifier used allows parallel stereo amplification of the input signal, the impacts of these additional sources of noise can be mitigated through the use of cross spectral density (CSD) analysis.
+
+Though we are interested in the PSD of the thermal noise, the average CSD will converge to the desired result, as the averages of uncorrelated signals tend to zero \cite{Rubiola2010}. As the signal passes through each amplifier channel in parallel, both signals $x(t), y(t)$ will contain the thermal noise of interest $c(t)$ as well as additional noise sources $a(t), b(t)$. 
+\begin{align}
+	x(t) = c(t) + a(t) \\
+	y(t) = c(t) + b(t)
+\end{align}
+The assumption is made that the thermal noise $c(t)$ across both channels is correlated as it has a common source, and the additional noise sources on each independent channel $a(t), b(t)$ are uncorrelated and have a zero average. Now performing a Fourier transform on each of these signals results in 
+\begin{equation}
+	x(t) \leftrightarrow X(f)
+\end{equation}
+In the CSD analysis we find that the expectation value of the CSD is
+\begin{align}
+	\langle S_{xy}\rangle &= \frac{1}{T}\langle YX^*\rangle = \frac{1}{T}\langle CC^* \rangle = S_{cc}
+\end{align}
+where the expectation values of the uncorrelated signals are zero and the CSD value is equivalent to the PSD of the isolated thermal noise \cite{Rubiola2010}. Using this method we will be able to minimize the contributions from other noise sources and extract the equivalent of the PSD for the thermal noise from our signal for further analysis.
+
+% Experimental Design
+
+Data was collected by connecting a resistor housed inside of a copper shield to an amplifier; the amplifier sent the input signal through two identical channels of the amplifier in parallel in order to output a stereo signal through an external sound card and into the computer recording device as shown in Figure \ref{fig:circuit}. 
+
+\begin{figure}[ht]
+\centering
+\resizebox{\columnwidth}{!}{
+\begin{circuitikz}[american, transform shape]
+% Resistor with left end grounded
+\draw (0,0) node[ground]{} -- (0,0) to[resistor, l=$R$, -*] (3,0);
+
+% Amplifier 1 (top)
+\draw (3,0) -- (5,1) node[op amp, anchor=-] (A1) {}
+      (A1.+) -- ++(-0.5,0) node[ground]{};
+\draw (A1.out) -- ++(1,0) node[right]{Stereo Channel 1};
+
+% Amplifier 2 (bottom, parallel)
+\draw (3,0) -- (5,-1) node[op amp, anchor=-] (A2) {}
+      (A2.+) -- ++(-0.5,0) node[ground]{};
+\draw (A2.out) -- ++(1,0) node[right]{Stereo Channel 2};
+\end{circuitikz}
+}
+\caption{Schematic of the measurement setup. A grounded resistor in a copper shield connected via BNC-cable to an amplifier. The signal goes through two identical amplifiers in parallel, outputting an amplified signal in stereo which is then sent through 3.5mm cable to the laptop via an external sound card.}
+\label{fig:circuit}
+\end{figure}
+
+The audio recording program Audacity was used to record the signal and save the data in .WAV file format, however this filetype did not include voltage information, only a digital signal amplitude. In order to analyze the data, calibration of the sound card as well as the amplifier was required. 
+
+To determine the relation between digital amplitude and voltage, a function generator was used to create sine wave signal of known voltage and the data from the .WAV file was fit with a sine fitting function in order to determine the digital amplitude value at each input voltage. From this, a linear fit of voltage as a function of digital amplitude was performed in order to determine a digital amplitude to voltage conversion function.
+
+As the voltage of the thermal noise was small, capturing the data required amplification of the signal. To retrieve the unamplified values for analysis, the amplifier required characterization. To accomplish this, a small voltage signal was sent from a function generator through the amplifier and recorded using the experimental setup. At a fixed input voltage the output voltage from the amplifier was measured using a digital multimeter at a range of frequencies from $50$Hz to $20$kHz. Although each channel of the amplifier contained several amplifiers in series, the data was fit using a simple low-pass filter model 
+\begin{equation} \label{eq:Gain}
+	G(f) = \frac{G_0}{\sqrt{1 + \left(\frac{f}{f_c}\right)^2}}
+\end{equation} which through residual and $\chi^2$ analysis we found sufficient (see Figure \ref{fig:Cal} (a)).
+
+After the linear digital amplitude conversion and the gain correction the spectral densities exhibited some systemic periodicity on the signal over the frequency band of analysis; this appeared as periodic sinusoidal-like fluctuations in the thermal noise. To correct for this, a sine signal of known voltage was recorded through Audacity and the recorded signal amplitude was converted to voltage using our linear transformation; this was done across a range of frequencies from $500$Hz to $15$kHz at intervals of $500$Hz. The recorded voltage over the input voltage was plotted against the signal frequency and an interpolation of the data (see Figure \ref{fig:Cal}), was used as a correction function that, when applied to the spectral densities, corrected for the observed systemic periodicity.
+
+\begin{figure}[ht]
+\includegraphics[width=\columnwidth]{calibration.pdf}
+\caption{(a) Characterization of the amplifier gain at a fixed frequency, modeled by Equation \ref{eq:Gain}. The gain data (blue) was plotted against frequency. Curve fitting (red) of the collected data produced gain $G_0=2170\pm10$ and cutoff frequency $f_c = 9900 \pm 100$ Hz (reduced $\chi^2=0.26$) (b) Characterization of the frequency dependence of the sound card. Sound card voltage $V_{sc}$ over input voltage $V_{in}$ was plotted against frequency (blue) and the data was interpolated (red) to create a frequency correction function.}
+\label{fig:Cal}
+\end{figure}
+
+With the recording equipment calibrated, the experiment was then setup according to the circuit schematic shown in Figure \ref{fig:circuit} and the thermal noise of the resistors was recorded using Audacity. The digital amplitude was converted to voltage and a CSD analysis was performed in order to mitigate uncorrelated noise sources and isolate the thermal noise of interest. Finally, the data from the CSD was gain-adjusted (CSD$_\text{GA}$) and frequency-corrected through our calibrated gain function and frequency correction $F(f)$ where
+\begin{equation}
+	\text{CSD}_\text{GA} = \frac{\text{CSD}}{G(f)^2}F(f)^2
+\end{equation} 
+in order to retrieve the original magnitude of our thermal noise power spectral density.
+
+% Measurements and Discussion
+
+Measurement of thermal noise was performed on a range of resistances (see Table \ref{tab:CSDavg}): the resistances were measured via a digital multimeter (DMM) and uncertainties were given in the user manual by the manufacturer; and the temperature in the lab was taken from a wall mounted thermometer. Both PSD and CSD analyses were performed on each set of data. 
+
+Though the expectation was that the thermal noise CSD would be linear throughout the full range of observed frequencies, we observed nonlinear behaviour at both very low frequencies ($<100$Hz) as well as high frequencies ($>15000$Hz) -- at the low end there was a spike above expected value before the noise stabilized, and at the high end there was an observed decay in the spectral densities (SDs). We suspect that the drop off at high frequencies was due to filtering within the sound card designed to prevent or minimize aliasing at frequencies approaching the Nyquist limit imposed by the sampling rate at which we collected our data, $f_s=24$kHz. Although an ideal anti-aliasing filter (AAF) would pass all frequencies equally before a specific cut-off, practical AAFs begin to exhibit a decay starting at a frequency below the Nyquist limit \cite{Toft2024}. As well, for $R=99500\pm500\Omega$ that there was nonlinear behaviour below $5000$Hz and above $13000$Hz, and for $R=994000\pm5000\Omega$ no frequency band exhibited linear behaviour; as such, these two resistances were excluded from further analysis. 
+
+Analysis was performed on a reduced band of frequencies ($\approx500$Hz$\to15$kHz) to focus on the regions that exhibited the most linear behaviour across the full range of analyzed resistors; this allowed for calculation of average SDs where the signal exhibited the expected behaviour whilst still retaining a large number of data points for the analysis. The SD analysis was performed on the full data set, with the average SD taken from the reduced band, and this was compared to expectations given by the theoretical equation for thermal noise; a representative set of SD for $R=987\pm5\Omega$ can be observed in Figure \ref{fig:CSD}, showing the raw PSD, and the gain adjusted and frequency corrected PSD and CSD.
+
+It was observed across all resistances that CSD analysis outperformed PSD analysis, producing averages across the reduced band closer to theoretical expectations in every case; this is in line with expectations, as the CSD analysis minimizes the contributions of uncorrelated noise sources to the final signal. However, experimental results for the CSD only found agreement using uncertainty-overlap criteria with theoretical expectations for three of the five resistances measured ($99\pm1\Omega, 987\pm5\Omega, 11840\pm90\Omega$). Uncertainty for the SD data was estimated by computing the autocorrelation of the signal over the examined frequency band, and using the effective number of independent samples $N$ from the results the uncertainty was estimated as
+\begin{equation}
+	\text{Uncertainty} = \frac{\sigma}{\sqrt{N}}
+\end{equation}
+There was also some uncertainty for the theoretic expectations in the measurement of the resistances and temperatures which were propagated using quadrature error propagation. Despite the disagreement for two of the 5 measured resistances, all five of the resistances produced results within $5\%$ difference from the theoretic values (see Table \ref{tab:CSDavg}).
+
+\begin{table}[ht]
+\centering
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{|c|c|c|c|}
+\hline
+R [$\Omega$] & $\langle$CSD$\rangle$ [V$^2$/Hz] & Theory [V$^2$/Hz] & \% Difference \\
+\hline
+$99\pm1$ & $(1.7\pm0.3)10^{-18}$ & $(1.62\pm0.02)10^{-18}$ & $2.46$ \\
+$987\pm5$ & $(1.64\pm0.07)10^{-17}$ & $(1.610\pm0.009)10^{-17}$ & $2.05$ \\
+$3910 \pm 20$ & $(6.6\pm0.22)10^{-17}$ & $(6.38 \pm 0.04)10^{-17}$ & $4.21$ \\
+$9870 \pm 50$ & $(1.67\pm0.05)10^{-16}$ & $(1.610 \pm 0.009)10^{-16}$ & $4.01$ \\
+$11840 \pm 90$ & $(2.01\pm0.06)10^{-16}$ & $(1.93 \pm 0.01)10^{-16}$ & $4.05$ \\
+\hline
+\end{tabular}
+}
+\caption{Average thermal noise CSD and theoretical thermal noise SD for each measured resistor, with percent difference relative to theoretical expectation.}
+\label{tab:CSDavg}
+\end{table}
+
+
+\begin{figure}[ht]
+\includegraphics[width=\columnwidth]{JN_R1kOhm_1min.pdf}
+\caption{SDs for thermal noise ($\text{R}=987\pm5\Omega$, $T=295.3\pm0.1$K). The data (grey), the reduced band of analysis (blue), and the average across the reduced band (black) are plotted against the theoretical value (red) of $1.610\pm0.09\cdot10^{-17}$ V$^2$/Hz. (a) Raw PSD. (b) Gain adjusted (GA) PSD: average value $3.00\pm0.09\cdot10^{-17}$ V$^2$/Hz; percent difference $86.1$\% (c) GA CSD (see Table \ref{tab:CSDavg} for results).}
+\label{fig:CSD}
+\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=\columnwidth]{JNvsR.pdf}
+\caption{(a) Linear fitting of PSD (black), CSD (blue), and theoretic thermal noise (red) as a function of resistance. PSD: (slope: $(1.70\pm 0.03)\cdot 10^{-20}$V$^2$/(Hz$\Omega$), reduced $\chi^2$: $0.07$). CSD: (slope: $(1.69\pm0.03)\cdot10^{-20}$V$^2$/(Hz$\Omega$), reduced $\chi^2$: $0.05$). Theory: (slope: $1.63\cdot10^{-20}$V$^2$/(Hz$\Omega$)) (b) Residuals of experimental data versus theoretic expectations for the PSD (black) and CSD (blue), with theory as the base line(red).}
+\label{fig:JNvR}
+\end{figure}
+
+The average PSD and CSD values across the range of resistances were plotted as a function of resistance and a fit was performed on each using a linear model with free parameters of slope and offset. The decision to include offset was made to accommodate for uncorrelated noise in the PSD and any other noise sources not entirely removed through cross correlation in the CSD. The results showed that for a fixed temperature both the PSD and CSD were well described as linearly dependent on resistance (see Figure \ref{fig:JNvR} (a)). The fitting parameters for the PSD had slope $(1.70\pm 0.03)10^{-20}$ V$^2$/(Hz$\Omega$) and an offset $(1.34\pm0.03)10^{-17}$ V$^2$/Hz with a reduced $\chi^2 = 0.07$; the relatively large offset is unsurprising as the thermal noise itself was small and the PSD did not remove any uncorrelated noise between channels. The fitting parameters for the CSD had slope $(1.69\pm0.03)10^{-20}$ V$^2$/(Hz$\Omega$) and an offset $(-0.6\pm2.7)10^{-19}$ V$^2$/Hz with a reduced $\chi^2 = 0.05$; the offset itself agrees with zero within uncertainty-overlap -- where the absolute difference in values is less than the sum of the uncertainties -- as expected for the CSD. However it was observed that neither of the values for the slope agreed within uncertainty to the theoretical slope $1.63\cdot10^{-20}$ V$^2$/Hz, although the percent difference was small (PSD $4.34\%$ difference; CSD $3.86\%$ difference). One possible explanation is that there may still be impacts from additional noise sources that have a linear relation to resistance over the observed range of frequences, causing the increase in the slope.
+
+Although only three of five average thermal noise CSDs were in agreement with theoretical values, the percent differences being within $5\%$ of theoretical values support our expectations that there is inherent thermal noise with a spectral density of $S_v=4k_bTR$. Performing CSD analysis helped to remove some of the uncorrelated noise between the two amplifier channels, however all experimental results were greater than theoretical expectations, indicating that there may be additional noise sources that were not completely removed through this process. Further research may look into the source and characterization of these additional noise sources.
+
+As thermal noise is a fundamental property of any electronic system with resistance, and the thermal noise is small in magnitude, better analysis can be extremely useful, especially in the design and research of low amplitude or high sensitivity signal processing.
+
+
+\begin{acknowledgments}
+The authors acknowledge helpful discussions with A. Huang, A. Chaudhary, and O. De Vries. The experiment was supported through the invaluable instruction provided by Professor J. Folk, as well as the efforts of M. Jasinksi, D. Prins, S. Rahman and M. Yun.
+\end{acknowledgments}
+
+\bibliography{main}
+
+\end{document}
+
+%
+% ****** End of file apstemplate.tex ******

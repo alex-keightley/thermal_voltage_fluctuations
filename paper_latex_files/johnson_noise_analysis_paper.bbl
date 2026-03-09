@@ -1,0 +1,67 @@
+%merlin.mbs apsrev4-1.bst 2010-07-25 4.21a (PWD, AO, DPC) hacked
+%Control: key (0)
+%Control: author (8) initials jnrlst
+%Control: editor formatted (1) identically to author
+%Control: production of article title (-1) disabled
+%Control: page (0) single
+%Control: year (1) truncated
+%Control: production of eprint (0) enabled
+\begin{thebibliography}{5}%
+\makeatletter
+\providecommand \@ifxundefined [1]{%
+ \@ifx{#1\undefined}
+}%
+\providecommand \@ifnum [1]{%
+ \ifnum #1\expandafter \@firstoftwo
+ \else \expandafter \@secondoftwo
+ \fi
+}%
+\providecommand \@ifx [1]{%
+ \ifx #1\expandafter \@firstoftwo
+ \else \expandafter \@secondoftwo
+ \fi
+}%
+\providecommand \natexlab [1]{#1}%
+\providecommand \enquote  [1]{``#1''}%
+\providecommand \bibnamefont  [1]{#1}%
+\providecommand \bibfnamefont [1]{#1}%
+\providecommand \citenamefont [1]{#1}%
+\providecommand \href@noop [0]{\@secondoftwo}%
+\providecommand \href [0]{\begingroup \@sanitize@url \@href}%
+\providecommand \@href[1]{\@@startlink{#1}\@@href}%
+\providecommand \@@href[1]{\endgroup#1\@@endlink}%
+\providecommand \@sanitize@url [0]{\catcode `\\12\catcode `\$12\catcode `\&12\catcode `\#12\catcode `\^12\catcode `\_12\catcode `\%12\relax}%
+\providecommand \@@startlink[1]{}%
+\providecommand \@@endlink[0]{}%
+\providecommand \url  [0]{\begingroup\@sanitize@url \@url }%
+\providecommand \@url [1]{\endgroup\@href {#1}{\urlprefix }}%
+\providecommand \urlprefix  [0]{URL }%
+\providecommand \Eprint [0]{\href }%
+\providecommand \doibase [0]{http://dx.doi.org/}%
+\providecommand \selectlanguage [0]{\@gobble}%
+\providecommand \bibinfo  [0]{\@secondoftwo}%
+\providecommand \bibfield  [0]{\@secondoftwo}%
+\providecommand \translation [1]{[#1]}%
+\providecommand \BibitemOpen [0]{}%
+\providecommand \bibitemStop [0]{}%
+\providecommand \bibitemNoStop [0]{.\EOS\space}%
+\providecommand \EOS [0]{\spacefactor3000\relax}%
+\providecommand \BibitemShut  [1]{\csname bibitem#1\endcsname}%
+\let\auto@bib@innerbib\@empty
+%</preamble>
+\bibitem [{\citenamefont {Nyquist}(1928)}]{Nyquist1928}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {H.}~\bibnamefont {Nyquist}},\ }\href {\doibase 10.1103/PhysRev.32.110} {\bibfield  {journal} {\bibinfo  {journal} {Phys. Rev.}\ }\textbf {\bibinfo {volume} {32}},\ \bibinfo {pages} {110} (\bibinfo {year} {1928})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {White}\ \emph {et~al.}(2003)\citenamefont {White}, \citenamefont {Galleano}, \citenamefont {Actis}, \citenamefont {Brixy}, \citenamefont {de~Groot}, \citenamefont {Dubbeldam}, \citenamefont {Reesink}, \citenamefont {Edler}, \citenamefont {Sakurai}, \citenamefont {Shepard},\ and\ \citenamefont {Gallop}}]{JNThermometry2003}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {D.}~\bibnamefont {White}}, \bibinfo {author} {\bibfnamefont {R.}~\bibnamefont {Galleano}}, \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Actis}}, \bibinfo {author} {\bibfnamefont {H.}~\bibnamefont {Brixy}}, \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {de~Groot}}, \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Dubbeldam}}, \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Reesink}}, \bibinfo {author} {\bibfnamefont {F.}~\bibnamefont {Edler}}, \bibinfo {author} {\bibfnamefont {H.}~\bibnamefont {Sakurai}}, \bibinfo {author} {\bibfnamefont {R.}~\bibnamefont {Shepard}}, \ and\ \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Gallop}},\ }\href {\doibase 10.1088/0026-1394/33/4/6} {\bibfield  {journal} {\bibinfo  {journal} {Metrologia}\ }\textbf {\bibinfo {volume} {33}},\ \bibinfo {pages} {325} (\bibinfo {year} {2003})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Qu}\ \emph {et~al.}(2019)\citenamefont {Qu}, \citenamefont {Benz}, \citenamefont {Rogalla}, \citenamefont {Tew}, \citenamefont {White},\ and\ \citenamefont {Zhou}}]{Qu2019}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {J.~F.}\ \bibnamefont {Qu}}, \bibinfo {author} {\bibfnamefont {S.~P.}\ \bibnamefont {Benz}}, \bibinfo {author} {\bibfnamefont {H.}~\bibnamefont {Rogalla}}, \bibinfo {author} {\bibfnamefont {W.~L.}\ \bibnamefont {Tew}}, \bibinfo {author} {\bibfnamefont {D.~R.}\ \bibnamefont {White}}, \ and\ \bibinfo {author} {\bibfnamefont {K.~L.}\ \bibnamefont {Zhou}},\ }\href {\doibase 10.1088/1361-6501/ab3526} {\bibfield  {journal} {\bibinfo  {journal} {Measurement Science and Technology}\ }\textbf {\bibinfo {volume} {30}} (\bibinfo {year} {2019}),\ 10.1088/1361-6501/ab3526}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Rubiola}\ and\ \citenamefont {Vernotte}(2010)}]{Rubiola2010}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {E.}~\bibnamefont {Rubiola}}\ and\ \bibinfo {author} {\bibfnamefont {F.}~\bibnamefont {Vernotte}},\ }\href {https://arxiv.org/abs/1003.0113} {\enquote {\bibinfo {title} {The cross-spectrum experimental method},}\ } (\bibinfo {year} {2010}),\ \Eprint {http://arxiv.org/abs/1003.0113} {arXiv:1003.0113 [physics.ins-det]} \BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Toft}(2024)}]{Toft2024}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {R.}~\bibnamefont {Toft}},\ }\href {https://ir.lib.uwo.ca/popmusicforum_techmatters/11} {\bibfield  {journal} {\bibinfo  {journal} {Technical Matters}\ }\textbf {\bibinfo {volume} {11}} (\bibinfo {year} {2024})}\BibitemShut {NoStop}%
+\end{thebibliography}%
