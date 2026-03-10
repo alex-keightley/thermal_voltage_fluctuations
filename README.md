@@ -53,7 +53,10 @@ To recompile the paper run the LaTeX build recipe: pdflatex $\to$ bibtex $\to$ p
 ## Sample Figures
 
 Calibration curves:
-![Calibration Curves](/figures/calibration.pdf)
+![Calibration Curves](/figures/calibration.png)
 
 Sample JN PSD:
-![Johnson Noise PSD](/figures/JN_R10kOhm_1min.pdf)
+![Johnson Noise PSD](/figures/JN_R10kOhm_1min.png)
+
+Linear Plot of Average Spectral Density vs Resistance:
+![JN vs. R](/figures/JNvsR.png)
